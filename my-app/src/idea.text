@@ -1,0 +1,12 @@
+Création d'un blog pour créér, lire, modifier et supprimer des articles de blog
+
+1 page d'accueil avec les articles 
+1 page pour créer un nouvelle articles 
+1 page pour lire un articles + en détails 
+Fct pour modifier ou supprimer un artciles 
+
+POST : Ajouter un article.
+GET articles/: Récupérer tous les articles.
+GET /articles/id: Récupérer un article par son ID.
+PUT /articles/:id : Modifier un article.
+DELETE /atricles/:id : Supprimer un article.
