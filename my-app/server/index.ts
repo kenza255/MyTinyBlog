@@ -1,14 +1,16 @@
 import express from 'express'; // import du framework express 
-import cors from 'cors'; // pour gerer les req 
 import { createPool, ResultSetHeader} from 'mysql2/promise';
 import { error } from 'console';
 
 // configuration du serveur sur le port 3000 et initialisation de l'app avc express 
+
 const app = express();
 const port = 3000;
+const cors = require ('cors');
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
 
 const pool = createPool({
     host: 'localhost',
@@ -40,6 +42,13 @@ async function initializeDatabase() {
 
 initializeDatabase();
 
+app.use((req, res, next) => {
+    if (req.url.endsWith('.tsx')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+    next();
+  });
+
 // routes 
 
 // routes pour récupérer toutes les données des articles 
@@ -67,19 +76,22 @@ app.get('/api/articles/:id', async (req, res) => {
 
 // création d'un nouvel article 
 app.post('/api/articles', async (req, res) => {
+    console.log('Received POST request:', req.method, req.url, req.body);
   const { title, content, author } = req.body;
 
   if (!title || !content || !author) {
+    console.log('Champs manquants:', { title, content, author });
     return res.status(400).json({error: "Champs manquants"})
   }
   try {
-
+    console.log('Veuillez remplir les champs manquants :', { title, content, author });
     const [result] = await pool.query<ResultSetHeader>(
       'INSERT INTO articles (title, content, author) VALUES (?, ?, ?)',
       [title, content, author]
     );
     res.status(201).json({ id: result.insertId, title, content, author });
   } catch (error) {
+    console.error('Error during insert:', error);
     res.status(500).json({ error: 'Erreur lors de la création de l article ' });
   }
 });

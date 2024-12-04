@@ -1,4 +1,5 @@
 import React from 'react';
+import Heading from './Heading';
 import { Menu, PlusCircle } from 'lucide-react';
 
 interface HeaderProps { // fct pour créer un nouvel article
@@ -41,6 +42,7 @@ export function Header({onNewArticle}:
           </div>
         </div>
       </div>
+      <Heading />
     </header>
   );
 };

@@ -1,3 +1,5 @@
+import { title } from "process";
+
 const API_URL = 'http://localhost:3000/api';
 
 export async function getArticles() {
@@ -13,13 +15,18 @@ export async function getArticle(id: number) {
 }
 
 export async function createArticle(article: { title: string; content: string; author: string }) {
-  const response = await fetch(`${API_URL}/articles`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(article),
-  });
-  if (!response.ok) throw new Error('Erreur lors de la création du nouvel article');
-  return response.json();
-}
+    const response = await fetch(`${API_URL}/articles`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(article), // Utilisez l'objet article passé en paramètre
+    });
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ error: 'Une erreur est survenue' }));
+      throw new Error(error.message || 'Failed to create article');
+    }
+  
+    return response.json();
+  }
+  

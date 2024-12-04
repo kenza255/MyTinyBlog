@@ -11,7 +11,7 @@ export function Footer() {
           <div className="col-span-2">
             <h2 className="text-white text-lg font-semibold mb-4">À propos de mon blog  </h2>
             <p className="text-gray-400">
-              Je  te partages mes astuces pour trouver ton alternance ! 
+              Je te partages mes astuces pour trouver ton alternance ! 
             </p>
           </div>
 
@@ -21,12 +21,12 @@ export function Footer() {
             <ul className="space-y-2">
               <li><a href="/articles" className="hover:text-white">Articles</a></li>
 
-              <li><a href="/about" className="hover:text-white">About Us</a></li>
+              <li><a href="/about" className="hover:text-white">About Myself</a></li>
               <li><a href="/contact" className="hover:text-white">Contact</a></li>
             </ul>
           </div>
 
-          {/* Social links */}
+          {/* Réseaux sociaux liens */}
           <div>
             <h2 className="text-white text-lg font-semibold mb-4">Mes réseaux</h2>
             <div className="flex space-x-4">

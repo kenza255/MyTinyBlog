@@ -2,6 +2,8 @@ import React from 'react';
 import { format } from 'date-fns';
 import type { Article } from '../types';
 
+//pour afficher un article avec son style défini 
+
 interface ArticleCardProps {
   article: Article;
   onClick: () => void;
